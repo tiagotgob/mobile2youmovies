@@ -34,12 +34,12 @@
         android:indeterminateTint="@color/colorPrimaryDark"/>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_design"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/progressBar"
         android:gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:padding="15dp"
         android:text="Designed by Mobile 2 You"
         android:textColor="@android:color/black"
