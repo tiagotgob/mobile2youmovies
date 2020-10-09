@@ -1,4 +1,4 @@
-package br.com.tgob.mobile2youmovies.Activity
+package br.com.tgob.mobile2youmovies.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
