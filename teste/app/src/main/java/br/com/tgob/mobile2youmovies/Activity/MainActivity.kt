@@ -1,7 +1,8 @@
-package br.com.tgob.mobile2youmovies
+package br.com.tgob.mobile2youmovies.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.com.tgob.mobile2youmovies.R
 
 class MainActivity : AppCompatActivity() {
 
