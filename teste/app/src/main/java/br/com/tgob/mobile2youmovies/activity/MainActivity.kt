@@ -3,8 +3,12 @@ package br.com.tgob.mobile2youmovies.activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import br.com.tgob.mobile2youmovies.R
+import br.com.tgob.mobile2youmovies.adapter.RecyclerAdapter
 import br.com.tgob.mobile2youmovies.entity.FilmEntity
+import br.com.tgob.mobile2youmovies.entity.SimilarMoviesEntity
 import br.com.tgob.mobile2youmovies.service.RetroFitConfig
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,15 +20,38 @@ const val POSTER_BASE_URL =  "https://image.tmdb.org/t/p/w342/or06FN3Dka5tukK1e9
 
 var isButtonClicked: Boolean = false
 
+lateinit var recyclerView: RecyclerView
+lateinit var recyclerAdapter: RecyclerAdapter
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //chamada do similarMovies
+        recyclerView = findViewById(R.id.rv_similarmovies)
+        recyclerAdapter = RecyclerAdapter(this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = recyclerAdapter
 
-        //chamada do retrofit
-        val call = RetroFitConfig.getAPI().getMovieDetails(299534, "91c42141d6448c36960c2a9907032611")
+
+        val callSimilar = RetroFitConfig.getListOfSimilarMovies().getSimilarMovies(299534,"91c42141d6448c36960c2a9907032611", 1)
+
+                callSimilar.enqueue( object : Callback<SimilarMoviesEntity>{
+            override fun onResponse(call: Call<SimilarMoviesEntity>, response: Response<SimilarMoviesEntity>) {
+
+                if(response?.body() != null)
+                    recyclerAdapter.setSimilarMovie(response.body()!!)
+            }
+
+            override fun onFailure(call: Call<SimilarMoviesEntity>?, t: Throwable?) {
+                Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
+            }
+        })
+
+        //chamada do singleDetails
+        val call = RetroFitConfig.getFilm().getMovieDetails(299534, "91c42141d6448c36960c2a9907032611")
 
         call.enqueue(object : Callback<FilmEntity> {
             override fun onResponse(call : Call<FilmEntity>, response: Response<FilmEntity>){

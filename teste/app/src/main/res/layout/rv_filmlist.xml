@@ -15,25 +15,35 @@
         app:srcCompat="@android:drawable/btn_dialog" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tv_rfilmTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="42dp"
-        android:text="TESTE"
+        android:text="Titutlo"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/imv_relatedfilmlistimg"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_filmyear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="TextView"
+        android:text="1990"
         app:layout_constraintStart_toEndOf="@+id/imv_relatedfilmlistimg"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_rfilmTitle" />
+
+    <TextView
+        android:id="@+id/tv_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Drama, Fantasy"
+        app:layout_constraintStart_toEndOf="@+id/tv_filmyear"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rfilmTitle" />
 
     <ImageView
         android:id="@+id/imageView2"

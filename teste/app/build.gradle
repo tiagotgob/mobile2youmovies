@@ -20,7 +20,7 @@ android {
             targetCompatibility JavaVersion.VERSION_1_8
         }
 
-        kotlinOptions{
+        kotlinOptions {
             jvmTarget = "1.8"
         }
     }
@@ -52,7 +52,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
     //Recyclerview
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // Retrofit
@@ -75,5 +75,4 @@ dependencies {
 
     //layout
     implementation "androidx.constraintlayout:constraintlayout:2.0.2"
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
