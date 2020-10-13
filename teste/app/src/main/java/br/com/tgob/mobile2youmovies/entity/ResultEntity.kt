@@ -3,7 +3,7 @@ package br.com.tgob.mobile2youmovies.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class ResultEntity(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
@@ -29,7 +29,7 @@ data class Result(
     @SerializedName("video")
     val video: Boolean,
     @SerializedName("vote_average")
-    val voteAverage: Int,
+    val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
 )

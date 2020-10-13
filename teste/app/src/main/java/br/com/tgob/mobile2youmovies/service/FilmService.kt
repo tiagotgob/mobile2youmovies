@@ -1,7 +1,7 @@
 package br.com.tgob.mobile2youmovies.service
 
 import br.com.tgob.mobile2youmovies.entity.FilmEntity
-import br.com.tgob.mobile2youmovies.entity.Result
+import br.com.tgob.mobile2youmovies.entity.ResultEntity
 import br.com.tgob.mobile2youmovies.entity.SimilarMoviesEntity
 import retrofit2.Call
 import retrofit2.http.GET
@@ -13,5 +13,5 @@ interface FilmService {
     fun getMovieDetails(@Path("movie_id") id: Int, @Query ("api_key") apiKey: String) : Call<FilmEntity>
 
     @GET("movie/{movie_id}/similar")
-    fun getSimilarMovies(@Path("movie_id") id: Int, @Query ("api_key") apiKey: String) : Call<Result>
+    fun getSimilarMovies(@Path("movie_id") id: Int, @Query ("api_key") apiKey: String) : Call<SimilarMoviesEntity>
 }

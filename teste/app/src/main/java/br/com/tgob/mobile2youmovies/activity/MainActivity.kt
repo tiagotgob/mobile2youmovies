@@ -5,9 +5,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tgob.mobile2youmovies.R
-import br.com.tgob.mobile2youmovies.adapter.RecyclerAdpater
+import br.com.tgob.mobile2youmovies.adapter.SImilarMovieAdapter
 import br.com.tgob.mobile2youmovies.entity.FilmEntity
-import br.com.tgob.mobile2youmovies.entity.Result
+import br.com.tgob.mobile2youmovies.entity.ResultEntity
 import br.com.tgob.mobile2youmovies.entity.SimilarMoviesEntity
 import br.com.tgob.mobile2youmovies.service.RetroFitConfig
 import com.bumptech.glide.Glide
@@ -22,8 +22,8 @@ var isButtonClicked: Boolean = false
 
 class MainActivity : AppCompatActivity() {
 
-    private val resultList: MutableList<Result> = mutableListOf()
-    private lateinit var recyclerAdpater: RecyclerAdpater
+    private val resultEntityList: MutableList<ResultEntity> = mutableListOf()
+    private lateinit var SImilarMovieAdapter: SImilarMovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,25 +31,24 @@ class MainActivity : AppCompatActivity() {
 
 
         //setup the adapter
-        recyclerAdpater = RecyclerAdpater(resultList)
+        SImilarMovieAdapter = SImilarMovieAdapter(resultEntityList)
 
         //setting up the recyclerview
         rv_similarmovies.layoutManager = LinearLayoutManager(this)
-        rv_similarmovies.adapter = recyclerAdpater
+        rv_similarmovies.adapter = SImilarMovieAdapter
 
 
         val call2 = RetroFitConfig.getListOfSimilarMovies().getSimilarMovies(299534,"91c42141d6448c36960c2a9907032611")
 
-        call2.enqueue(object : Callback<Result> {
-            override fun onResponse(call : Call<Result>, response2: Response<Result>){
+        call2.enqueue(object : Callback<SimilarMoviesEntity> {
+            override fun onResponse(call : Call<SimilarMoviesEntity>, response2: Response<SimilarMoviesEntity>){
                 println(response2)
                 if(response2.code() == 200){
-                    response2.body()!!
-                    recyclerAdpater.notifyDataSetChanged()
+                    SImilarMovieAdapter.setList(response2.body()!!.results)
                 }
             }
             //lidando com o erro
-            override fun onFailure(calll: Call<Result>, t: Throwable){
+            override fun onFailure(calll: Call<SimilarMoviesEntity>, t: Throwable){
                 Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
             }
         })
@@ -86,12 +85,12 @@ class MainActivity : AppCompatActivity() {
         })
 
         //mudando o botao de favoritos
-        btn_addfavorite.setOnClickListener() {
-            if(!isButtonClicked) { btn_addfavorite.setBackgroundResource(R.drawable.heartfull)
-                isButtonClicked = true
+        btn_addfavorite.setOnClickListener {
+            isButtonClicked = if(!isButtonClicked) { btn_addfavorite.setBackgroundResource(R.drawable.heartfull)
+                true
             } else{
                 btn_addfavorite.setBackgroundResource(R.drawable.heart)
-                isButtonClicked = false
+                false
             }
         }
     }
