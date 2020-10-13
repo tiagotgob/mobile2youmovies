@@ -6,24 +6,16 @@ const val BASE_URL = "https://api.themoviedb.org/3/"
 
 object  RetroFitConfig {
 
+    var retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
     fun getFilm(): FilmService {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        return retrofit.create(FilmService::class.java)
-
+        return this.retrofit.create(FilmService::class.java)
     }
 
-    fun getListOfSimilarMovies(): SimilarMovieService {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        return retrofit.create(SimilarMovieService::class.java)
-
+    fun getListOfSimilarMovies(): FilmService {
+        return this.retrofit.create(FilmService::class.java)
     }
-
 }

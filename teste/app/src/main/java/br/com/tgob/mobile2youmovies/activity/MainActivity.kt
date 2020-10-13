@@ -3,8 +3,11 @@ package br.com.tgob.mobile2youmovies.activity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.tgob.mobile2youmovies.R
+import br.com.tgob.mobile2youmovies.adapter.RecyclerAdpater
 import br.com.tgob.mobile2youmovies.entity.FilmEntity
+import br.com.tgob.mobile2youmovies.entity.Result
 import br.com.tgob.mobile2youmovies.entity.SimilarMoviesEntity
 import br.com.tgob.mobile2youmovies.service.RetroFitConfig
 import com.bumptech.glide.Glide
@@ -19,25 +22,30 @@ var isButtonClicked: Boolean = false
 
 class MainActivity : AppCompatActivity() {
 
+    private val resultList: MutableList<Result> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //setting up the recyclerview
+        rv_similarmovies.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = RecyclerAdpater(resultList)
+        }
+
 
         val call2 = RetroFitConfig.getListOfSimilarMovies().getSimilarMovies(299534,"91c42141d6448c36960c2a9907032611")
 
-        call2.enqueue(object : Callback<SimilarMoviesEntity> {
-            override fun onResponse(call : Call<SimilarMoviesEntity>, response2: Response<SimilarMoviesEntity>){
+        call2.enqueue(object : Callback<Result> {
+            override fun onResponse(call : Call<Result>, response2: Response<Result>){
                 println(response2)
                 if(response2.code() == 200){
-
-                    //colocando as repostas
-                    val similarMoviesEntity = response2.body()!!
-
+                    resultList.addAll(response2.body())
                 }
             }
             //lidando com o erro
-            override fun onFailure(calll: Call<SimilarMoviesEntity>, t: Throwable){
+            override fun onFailure(calll: Call<Result>, t: Throwable){
                 Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
             }
         })
