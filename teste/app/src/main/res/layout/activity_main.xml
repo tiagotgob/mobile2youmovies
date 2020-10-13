@@ -4,7 +4,6 @@
     android:id="@+id/ll_movie"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_weight=".4"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
@@ -15,9 +14,11 @@
         android:orientation="vertical">
 
         <ImageView
+            android:src="@drawable/avengers"
+            android:id="@+id/imv_Poster"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/teste" />
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -31,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22dp"
+            android:maxLines="2"
             android:layout_marginEnd="30dp"
             android:paddingStart="14dp"/>
 
@@ -40,6 +42,7 @@
             android:layout_weight="1" />
 
         <Button
+            android:id="@+id/btn_addfavorite"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:background="@drawable/heart"
@@ -52,28 +55,32 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_voteCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/heart"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/heartfull"
             android:text="1.2k Likes"
             android:drawablePadding="8dp"
             android:paddingStart="14dp"/>
 
         <TextView
+            android:id="@+id/tv_Popularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
             android:text="ratings"
-            android:drawableLeft="@drawable/heart"
+            android:drawableLeft="@drawable/popularity"
             android:drawablePadding="8dp"/>
     </LinearLayout>
 
 
-    <!--    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--        android:id="@+id/list_recycler_view"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content">-->
-    <!--    </android.support.v7.widget.RecyclerView>-->
+<!--        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--            android:id="@+id/list_recycler_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+<!--        </android.support.v7.widget.RecyclerView>-->
 
 </LinearLayout>
 
