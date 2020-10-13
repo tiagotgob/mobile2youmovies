@@ -23,16 +23,19 @@ var isButtonClicked: Boolean = false
 class MainActivity : AppCompatActivity() {
 
     private val resultList: MutableList<Result> = mutableListOf()
+    private lateinit var recyclerAdpater: RecyclerAdpater
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        //setup the adapter
+        recyclerAdpater = RecyclerAdpater(resultList)
+
         //setting up the recyclerview
-        rv_similarmovies.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = RecyclerAdpater(resultList)
-        }
+        rv_similarmovies.layoutManager = LinearLayoutManager(this)
+        rv_similarmovies.adapter = recyclerAdpater
 
 
         val call2 = RetroFitConfig.getListOfSimilarMovies().getSimilarMovies(299534,"91c42141d6448c36960c2a9907032611")
@@ -41,7 +44,8 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call : Call<Result>, response2: Response<Result>){
                 println(response2)
                 if(response2.code() == 200){
-                    resultList.addAll(response2.body())
+                    response2.body()!!
+                    recyclerAdpater.notifyDataSetChanged()
                 }
             }
             //lidando com o erro
@@ -81,6 +85,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        //mudando o botao de favoritos
         btn_addfavorite.setOnClickListener() {
             if(!isButtonClicked) { btn_addfavorite.setBackgroundResource(R.drawable.heartfull)
                 isButtonClicked = true
