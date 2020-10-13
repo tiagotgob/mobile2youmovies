@@ -10,6 +10,7 @@ import br.com.tgob.mobile2youmovies.entity.ResultEntity
 import br.com.tgob.mobile2youmovies.holder.MyHolder
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.adapter_similar_movie.view.*
+import java.text.SimpleDateFormat
 
 class SImilarMovieAdapter(private var listOfRelatedMovies: List<ResultEntity>) : RecyclerView.Adapter<MyHolder>() {
 
@@ -33,6 +34,7 @@ class SImilarMovieAdapter(private var listOfRelatedMovies: List<ResultEntity>) :
             val list = listOfRelatedMovies[position]
 
             val filmText = holder.itemView.tv_rfilmTitle
+            val date = SimpleDateFormat("dd-MM-yyyy").parse("14-02-2018")
             val filmYear = holder.itemView.tv_filmyear
             val category = holder.itemView.tv_category
             val filmposter = holder.itemView.imv_relatedfilmlistimg
