@@ -16,13 +16,13 @@ object  RetroFitConfig {
 
     }
 
-    fun getListOfSimilarMovies(): SimilarFilmService {
+    fun getListOfSimilarMovies(): SimilarMovieService {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        return retrofit.create(SimilarFilmService::class.java)
+        return retrofit.create(SimilarMovieService::class.java)
 
     }
 
