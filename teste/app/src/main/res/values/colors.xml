@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="background_black">#0d0d0d</color>
     <color name="white_texts">#FFFFFF</color>
+    <color name="heart_red">#f54242</color>
 </resources>

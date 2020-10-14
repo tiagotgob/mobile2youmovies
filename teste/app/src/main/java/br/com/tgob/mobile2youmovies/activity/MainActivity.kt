@@ -90,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                 true
             } else{
                 btn_addfavorite.setBackgroundResource(R.drawable.heart)
+
                 false
             }
         }
